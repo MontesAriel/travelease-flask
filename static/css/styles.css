@@ -1,0 +1,18 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero {
+  background: url('../img/hero-bg.jpg') center/cover no-repeat;
+  color: white;
+  background-blend-mode: darken;
+  padding: 100px 0;
+}
+
+.hero h1, .hero p {
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+}
+
+footer {
+  font-size: 0.9rem;
+}

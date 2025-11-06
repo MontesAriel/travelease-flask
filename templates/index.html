@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<!-- Hero / buscador -->
+<section class="hero bg-light py-5 text-center">
+  <div class="container">
+    <h1 class="display-5 fw-bold text-primary mb-3">Planificá tu próximo viaje con TravelEase</h1>
+    <p class="text-muted mb-4">Encontrá vuelos, alojamientos y paquetes al mejor precio</p>
+
+    <form class="row g-2 justify-content-center">
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Origen" required>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Destino" required>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control" placeholder="Fecha de ida" required>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control" placeholder="Fecha de vuelta">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Paquetes destacados -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <h2 class="text-center mb-5">Paquetes Destacados</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ url_for('static', filename='img/paris.jpg') }}" class="card-img-top" alt="París">
+          <div class="card-body">
+            <h5 class="card-title">París romántico</h5>
+            <p class="card-text text-muted">Vuelo + 5 noches de hotel desde <strong>US$ 1.200</strong></p>
+            <a href="/destinations" class="btn btn-outline-primary w-100">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ url_for('static', filename='img/ny.jpg') }}" class="card-img-top" alt="Nueva York">
+          <div class="card-body">
+            <h5 class="card-title">Nueva York urbana</h5>
+            <p class="card-text text-muted">Vuelo + 4 noches de hotel desde <strong>US$ 980</strong></p>
+            <a href="/destinations" class="btn btn-outline-primary w-100">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ url_for('static', filename='img/rio.jpg') }}" class="card-img-top" alt="Río de Janeiro">
+          <div class="card-body">
+            <h5 class="card-title">Sol en Río</h5>
+            <p class="card-text text-muted">Vuelo + 5 noches de hotel desde <strong>US$ 750</strong></p>
+            <a href="/destinations" class="btn btn-outline-primary w-100">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
