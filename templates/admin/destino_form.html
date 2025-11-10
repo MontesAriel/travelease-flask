@@ -1,0 +1,28 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}panel{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ "Editar Destino" if destino else "Nuevo Destino" }}</h2>
+
+<form action="{{ url_for('admin_destinos_update', destino_id=destino.destino_id) if destino else url_for('admin_destino_create') }}" method="POST">
+
+    <label>Nombre</label>
+    <input type="text" name="nombre" value="{{ destino.nombre if destino else '' }}" required>
+
+    <label>Precio base</label>
+    <input type="number" name="precio" step="0.01" value="{{ destino.precio_base if destino else '' }}" required>
+
+    <label>Imagen (ruta)</label>
+    <input type="text" name="imagen" value="{{ destino.imagen if destino else '' }}" required>
+
+    <button type="submit" class="btn btn-primary mt-3">
+        {{ "Actualizar" if destino else "Guardar" }}
+    </button>
+
+</form>
+
+{% endblock %}

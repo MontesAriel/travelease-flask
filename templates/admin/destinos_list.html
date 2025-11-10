@@ -1,0 +1,61 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}panel{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5">
+
+    <h2 class="text-center mb-4 section-title">Destinos</h2>
+
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_destino_new') }}" class="btn btn-primary">
+            + Nuevo Destino
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio base</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for d in destinos %}
+                <tr class="text-center">
+                    <td>{{ d.destino_id }}</td>
+                    <td>{{ d.nombre }}</td>
+                    <td>${{ d.precio_base }}</td>
+                    <td>
+                        {% if d.imagen %}
+                        <img src="/{{ d.imagen }}" width="100" class="rounded">
+                        {% else %}
+                        <span class="text-muted">Sin imagen</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('admin_destinos_editar', destino_id=d.destino_id) }}" class="btn btn-primary btn-sm">Editar</a>
+
+                        <a href="{{ url_for('admin_destinos_eliminar', destino_id=d.destino_id) }}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Seguro que deseas eliminar este destino?');">
+                            Eliminar
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

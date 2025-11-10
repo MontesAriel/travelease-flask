@@ -1,0 +1,19 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}panel{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<h2>Panel Administrativo</h2>
+
+<p>Bienvenido al panel de administración de TravelEase.</p>
+
+<div class="admin-grid">
+    <a href="{{ url_for('admin_destinos') }}" class="admin-card">
+        <h3>🌍 Destinos</h3>
+        <p>Administrar destinos turísticos.</p>
+    </a>
+</div>
+
+{% endblock %}

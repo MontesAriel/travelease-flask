@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Travelease - Sitio de viajes</title>
+        <link rel="icon" href="./img/logo.webp" type="image/x-icon">        
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Customized Bootstrap Stylesheet -->
+
+        <!-- Template Stylesheet -->
+        <link href="../css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+         <!-- Navbar & Hero Start -->
+         <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-pages px-4 px-lg-5 py-3 py-lg-0" style="background-color: #f5f5f566;">
+                <a href="../index.html" class="navbar-brand p-0 d-flex">
+                    <img src="../img/logo.webp" style="width: 100px; filter: invert(1);" alt="Logo Travelease"> 
+                    <h1 class="m-0" style="color: #222601;">Travelease</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="../index.html" class="nav-item nav-link">Home</a>
+                        <a href="./about.html" class="nav-item nav-link ">Nosotros</a>
+                        <a href="./services.html" class="nav-item nav-link active">Servicios</a>
+                        <a href="./packages.html" class="nav-item nav-link">Paquetes</a>
+                        <a href="./contact.html" class="nav-item nav-link">Contacto</a>
+                    </div>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalLogin"  class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4 boton-registrarse">Registrarse</button>
+                </div>
+            </nav>
+
+            <!-- Modal Login -->
+            <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLogin" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="modalLoginTitle">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="panel">
+                                                <div class="panel-body p-3">
+                                                    <form>
+                                                        <div class="form-group py-2">
+                                                            <div class="input-field"> 
+                                                                <span class="far fa-user p-2"></span> 
+                                                                <input type="text" placeholder="Usuario o Email" class="input-login" required> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group py-1 pb-2">
+                                                            <div class="input-field"> 
+                                                                <span class="fas fa-lock px-2"></span> 
+                                                                <input type="password" placeholder="Contraseña" class="input-login" required> 
+                                                                <button class="btn bg-white text-muted"> 
+                                                                    <span class="far fa-eye-slash"></span> 
+                                                                </button> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline"> 
+                                                            <input type="checkbox" name="remember" id="remember-login"> 
+                                                            <label for="remember-login" class="text-muted">Recuerdame</label> 
+                                                        </div>
+                                                        <div class="btn btn-primary btn-block mt-3 btn-login">Login</div>
+                                                        <div class="text-center pt-4 text-muted">¿No tienes una cuenta?  
+                                                            <button 
+                                                                type="button" data-bs-toggle="modal" 
+                                                                data-bs-target="#modalRegistrarse" 
+                                                                class="text-warning" style="border: none; background: none;"
+                                                            >
+                                                                Registrarse
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="mx-3 my-2 py-2 bordert">
+                                                    <div class="text-center py-3"> 
+                                                        <a href="#" class="px-2"> 
+                                                            <img class="img-icon-login" src="../img/icono-facebook.png" alt="icono facebook"> 
+                                                        </a> 
+                                                        <a href="#" class="px-2"> 
+                                                            <img class="img-icon-login" src="../img/icono-google.png" alt="icono google"> 
+                                                        </a> 
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Login -->
+
+            <!-- Modal Registro -->
+            <div class="modal fade" id="modalRegistrarse" tabindex="-1" aria-labelledby="modalRegistrarse" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalRegisterTitle">Registrarse</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="panel">
+                                                <div class="panel-body p-3">
+                                                    <form>
+                                                        <div class="form-group py-2">
+                                                            <div class="input-field"> 
+                                                                <span class="far fa-user p-2"></span> 
+                                                                <input type="text" placeholder="Usuario o Email" class="input-login" required> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group py-1 pb-2">
+                                                            <div class="input-field"> 
+                                                                <span class="fas fa-lock px-2"></span> 
+                                                                <input type="password" placeholder="Contraseña" class="input-login" required> 
+                                                                <button class="btn bg-white text-muted"> 
+                                                                    <span class="far fa-eye-slash"></span> 
+                                                                </button> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group py-1 pb-2">
+                                                            <div class="input-field"> 
+                                                                <span class="fas fa-lock px-2"></span> 
+                                                                <input type="password" placeholder="Confirma la contraseña" class="input-login" required> 
+                                                                <button class="btn bg-white text-muted"> 
+                                                                    <span class="far fa-eye-slash"></span> 
+                                                                </button> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline"> 
+                                                            <input type="checkbox" name="remember" id="remember-register"> 
+                                                            <label for="remember-register" class="text-muted text-warning">Recuerdame</label> 
+                                                        
+                                                        </div>
+                                                        <div class="text-center pt-4 text-muted">
+                                                            <div class="btn btn-primary btn-block mt-3 btn-login">Registrarse</div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="mx-3 my-2 py-2 bordert">
+                                                    <div class="text-center py-3"> 
+                                                        <a href="#" class="px-2"> 
+                                                            <img class="img-icon-login" src="../img/icono-facebook.png" alt="icono facebook"> 
+                                                        </a> 
+                                                        <a href="#" class="px-2"> 
+                                                            <img class="img-icon-login" src="../img/icono-google.png" alt="icono google"> 
+                                                        </a> 
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Registro -->
+
+
+        </div>    
+        <!-- Navbar & Hero End -->
+
+    
+        <!-- Services Start -->
+        <div class="container-fluid bg-light service py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5">
+                    <h5 class="section-title px-3">Servicios</h5>
+                    <h3 class="mb-0">Otros Servicios</h3>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white rounded p-4 pe-0">
+                                    <div class="service-content ">
+                                        <h5 class="mb-4">Tours Mundiales</h5>
+                                        <p class="mb-0">Ofrecemos tours alrededor del mundo, diseñados para brindarte experiencias únicas y memorables. Nuestros paquetes incluyen destinos populares y exóticos, con itinerarios personalizados para satisfacer tus intereses y necesidades.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-globe fa-4x text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white rounded p-4 pe-0">
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Reservación de Hoteles</h5>
+                                        <p class="mb-0">Nos encargamos de la reservación de hoteles en cualquier parte del mundo. Trabajamos con una amplia red de hoteles para ofrecerte las mejores opciones de alojamiento según tus preferencias y presupuesto.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-hotel fa-4x text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white rounded p-4 pe-0">
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Guías de Viaje</h5>
+                                        <p class="mb-0">Nuestros guías de viaje profesionales te acompañarán para asegurarse de que aproveches al máximo tu aventura. Conocen a fondo cada destino y te ofrecerán información valiosa y recomendaciones personalizadas.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-user fa-4x text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="service-content-inner d-flex align-items-center bg-white rounded p-4 pe-0">
+                                    <div class="service-content">
+                                        <h5 class="mb-4">Gestión de Eventos</h5>
+                                        <p class="mb-0">Organizamos y gestionamos eventos de todo tipo, desde conferencias y seminarios hasta bodas y celebraciones especiales. Nuestro equipo se encargará de cada detalle para que tu evento sea un éxito rotundo.</p>
+                                    </div>
+                                    <div class="service-icon p-4">
+                                        <i class="fa fa-cog fa-4x text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Services End -->
+
+         <!-- Testimonial Start -->
+         <div class="container testimonial py-5">
+            <div class="py-5">
+                <div class="mx-auto text-center mb-5">
+                    <h5 class="section-title px-3">Comentarios</h5>
+                </div>
+                <div id="carousel-comment" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="testimonial-item text-center rounded pb-4">
+                                        <div class="container container-comment">
+                                            <div class="-4">
+                                                <div class="testimonial-img p-1">
+                                                    <img src="../img/testimonial-4.jpg" class="img-fluid rounded-circle" alt="Testimonio">
+                                                </div>
+                                                <div>
+                                                    <h5 class="mb-0">John Abraham</h5>
+                                                    <p class="mb-0">New York, USA</p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-center mb-5">La visita a Nueva York fue increíble. La Estatua de la Libertad es simplemente impresionante.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-item text-center rounded pb-4">
+                                        <div class="container container-comment">
+                                            <div class="-4">
+                                                <div class="testimonial-img p-1">
+                                                    <img src="../img/testimonial-1.jpg" class="img-fluid rounded-circle" alt="Testimonio">
+                                                </div>
+                                                <div>
+                                                    <h5 class="mb-0">Carlos Souza</h5>
+                                                    <p class="mb-0">Río de Janeiro, Brasil</p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-center mb-5">El Cristo Redentor es majestuoso. La vista desde la cima es impresionante y la ciudad tiene una energía única.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="testimonial-item text-center rounded pb-4">
+                                        <div class="container container-comment">
+                                            <div class="-4">
+                                                <div class="testimonial-img p-1">
+                                                    <img src="../img/testimonial-2.jpg" class="img-fluid rounded-circle" alt="Testimonio">
+                                                </div>
+                                                <div>
+                                                    <h5 class="mb-0">Olga Petrova</h5>
+                                                    <p class="mb-0">Moscú, Rusia</p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-center mb-5">Moscú es fascinante. La Plaza Roja y el Kremlin son destinos obligados. ¡Qué rica es su historia y cultura!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-item text-center rounded pb-4">
+                                        <div class="container container-comment">
+                                            <div class="-4">
+                                                <div class="testimonial-img p-1">
+                                                    <img src="../img/testimonial-1.jpg" class="img-fluid rounded-circle" alt="Testimonio">
+                                                </div>
+                                                <div>
+                                                    <h5 class="mb-0">Carlos Souza</h5>
+                                                    <p class="mb-0">Río de Janeiro, Brasil</p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-center mb-5">El Cristo Redentor es majestuoso. La vista desde la cima es impresionante y la ciudad tiene una energía única.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-comment" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon btn bg-dark" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-comment" data-bs-slide="next">
+                        <span class="carousel-control-next-icon btn bg-dark" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+        <!-- Footer Start -->
+        <footer>
+            <div class="container-fluid footer py-5">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item d-flex flex-column">
+                                <h4 class="mb-4 text-white">Contacto</h4>
+                                <span class="text-white"><i class="fas fa-home me-2"></i> Brandsen 805, La Boca</span>
+                                <span class="text-white"><i class="fas fa-envelope me-2"></i>ariel.montes@davinci.edu.ar</span>
+                                <a href="https://wa.me/01153394887" class="mb-3"><i class="fas fa-phone me-2"></i> +011 53394887</a>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-share fa-2x text-white me-2"></i>
+                                    <a class="btn-square btn btn-primary rounded-circle mx-1" href="https://www.instagram.com/arieelmontes/" target="_blank">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a class="btn-square btn btn-primary rounded-circle mx-1" href="https://www.linkedin.com/in/montesariel/" target="_blank">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item d-flex flex-column">
+                                <h4 class="mb-4 text-white">Compañía</h4>
+                                <a href="./about.html"><i class="fas fa-angle-right me-2"></i> Sobre Nosotros</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item d-flex flex-column">
+                                <h4 class="mb-4 text-white">Soporte</h4>
+                                <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contacto</a> 
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3">
+                            <div class="footer-item">
+                                <h4 class="text-white mb-3">Pagos</h4>
+                                <div class="footer-bank-card">
+                                    <i class="fab fa-cc-amex fa-2x text-white me-2"></i>
+                                    <i class="fab fa-cc-visa fa-2x text-white me-2"></i>
+                                    <i class="fas fa-credit-card fa-2x text-white me-2"></i>
+                                    <i class="fab fa-cc-mastercard fa-2x text-white me-2"></i>
+                                    <i class="fab fa-cc-paypal fa-2x text-white me-2"></i>
+                                    <i class="fab fa-cc-discover fa-2x text-white me-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+            <!-- Copyright Start -->
+            <div class="container-fluid copyright text-body py-4">
+                <div class="container">
+                    <p class="text-center text-white">Creado por <b>Ariel Montes</b>, todos los derechos reservados ©.</p> 
+                </div>
+            </div>
+            <!-- Copyright End -->
+    
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        </footer>
+        <!-- Footer End -->
+
+    </body>
+</html>

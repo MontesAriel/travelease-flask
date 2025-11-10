@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+
+{% block title %}Destino{% endblock %}
+
+{% block extra_css %}
+<style>
+    .carousel-header {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="destino_id">
+        <!-- Header -->
+        <div class="container-fluid position-relative p-0">
+            <div id="carouselId" class="carousel slide carousel-package" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                    {% for img in imagenes %}
+                        <button type="button"
+                                data-bs-target="#carouselId"
+                                data-bs-slide-to="{{ loop.index0 }}"
+                                class="{% if loop.first %}active{% endif %}">
+                        </button>
+                    {% endfor %}
+                </div>
+
+                <div class="carousel-inner">
+                    {% for img in imagenes %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{ url_for('static', filename='img/destinos/' ~ img.ruta) }}"
+                                class="d-block w-100 img-fluid"
+                                alt="{{ destino.nombre }}">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Header End -->
+        
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <!-- Detalles del Paquete -->
+                <div class="col-lg-8">
+                    <h2>{{ destino.nombre }}</h2>
+                    <p>{{ destino.descripcion }}</p>
+                
+                    <!-- <div class="border-bottom pb-5 mb-5">
+                        <h3>Lo más destacado</h3>
+                        <ul class="list-unstyled lh-xl">
+                            {% for d in destacados %}
+                                <li>⭐ {{ d.texto }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div> -->
+<!--                 
+                    <div class="border-bottom pb-5 mb-5">
+                        <h3>Incluye</h3>
+                        <ul class="list-unstyled lh-xl">
+                            {% for item in incluye %}
+                                <li>✔ {{ item.texto }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div> -->
+
+                     <div class="border-bottom pb-5 mb-5">
+                        <h3>Alojamiento</h3>
+                        <div class="list-unstyled lh-xl">
+                            <h5>{{ alojamiento.nombre }}</h5>
+                            <span>{{ alojamiento.precio_noche | precio }} / noche</span>
+                        </div>
+                    </div>
+
+                    {% if vuelos %}
+                    <div class="border-bottom pb-5 mb-5">
+                        <h3>
+                            <i class="fa fa-users"></i>
+                            <span>Vuelo</span>
+                        </h3>
+                        <div class=" mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <span>Ida {{ vuelos[0].aerolinea.nombre }}:</span>
+                                <strong class="text-dark"><sup>$</sup>{{ vuelos[0].precio | precio }}</strong>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <span>Vuelta {{ vuelos[1].aerolinea.nombre }}:</span>
+                                <strong class="text-dark"><sup>$</sup>{{ vuelos[1].precio | precio }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                
+                    <!-- <div class="border-bottom pb-5 mb-5 accordion" id="accordionExample">
+                       <h3>Itinerario</h3>
+                        <div class="accordion" id="accordionExample">
+                            {% for dia in itinerario %}
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button" data-bs-toggle="collapse"
+                                                data-bs-target="#dia{{ dia.itinerario_id }}">
+                                            Día {{ dia.dia }}
+                                        </button>
+                                    </h3>
+                                    <div id="dia{{ dia.itinerario_id }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %} p-2" data-bs-parent="#accordionExample">
+                                        {{ dia.descripcion }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div> -->
+                
+                    <div class="border-bottom pb-5 mb-5">
+                        <h3 class="title fs-3 mb-2">Información</h3>
+                        <ul>
+                            <li>Tu(s) pase(s) se entregarán instantáneamente en formato PDF, que podrás guardar en tu teléfono o imprimir. Este PDF incluirá tu pase individual con código QR junto con la guía digital adjunta.</li>
+                            <li>Para la mejor experiencia posible, sigue las instrucciones en el PDF para sincronizar tu pase con la aplicación Go City.</li>
+                            <li>Todos los pases son válidos por 2 años desde la fecha de compra y solo se activan con tu primera visita a una atracción.</li>
+                            <li>Después de la activación, tu pase será válido por el número de días consecutivos comprados (no por períodos de 24 horas).</li>
+                            <li>Te recomendamos comenzar temprano en el día para aprovechar al máximo tus visitas turísticas. Las atracciones o tours más populares requieren reservación avanzada.</li>
+                            <li>Consulta la guía digital incluida (encontrada en tu voucher de confirmación) para obtener instrucciones antes de tu visita y asegúrate de hacer reservaciones con anticipación para evitar decepciones.</li>
+                        </ul>
+                    </div>
+                <!--
+                    <div>
+                        <h3 class="title fs-3">Opiniones de Clientes</h3>
+                        <div class="d-flex row ">
+                            <div class="col-12 col-lg-4 col-md-6 text-center" style="border-right: 1px solid var(--bs-border-color);">
+                                <h5 class="mb-4 text-start">Calificación general</h5>
+                                <div class="mb-2">
+                                    <div class="fs-1 mb-2">
+                                        <strong>5</strong><span>/5</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                                        <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                                        <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                                        <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                                        <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                                    </div>
+                                </div>
+                                <p class="small text-secondary">Basado en <strong class="text-dark">4746</strong> opiniones</p>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-6">
+                                <h5 class="mb-4">Resumen de opiniones</h5>
+                                <div class="list-unstyled summary-list lh-xl">
+                                    <div class="d-flex align-items-center">
+                                        <span class="title" style="width: 120px;">Guía</span>
+                                        <span class="bar ps-3 fw-semibold">4.4/5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="title" style="width: 120px;">Valor</span>
+                                        <span class="bar ps-3 fw-semibold">3.5/5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="title" style="width: 120px;">Servicio</span>
+                                        <span class="bar ps-3 fw-semibold">4.0/5</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="title" style="width: 120px;">Organización</span>
+                                        <span class="bar ps-3 fw-semibold">5.0/5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                -->
+                </div>
+                
+                
+                <!-- Tarjeta de Reserva -->
+                <div class="col-lg-4 ">
+                    <div class="card sticky width-card-reserva">
+                        <div class="card-body">
+                            <h4 class="card-title">Reserva tu Paquete</h4>
+                            <p class="card-text"><strong style="font-size: 32px;">${{ destino.precio_base | precio }}</strong>/persona</p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="fechaSalida" style="font-size: 14px; font-weight: 500;">Fecha de Incio</label>
+                                    <input type="date" class="form-control" id="fechaSalida" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaFin" style="font-size: 14px; font-weight: 500;">Fecha de Fin</label>
+                                    <input type="date" class="form-control" id="fechaFin" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cantidadPasajeros" style="font-size: 14px; font-weight: 500;">Cantidad de Pasajeros</label>
+                                    <input type="number" class="form-control" id="cantidadPasajeros" min="1" value="1" required>
+                                </div>
+                               <button 
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalReserva"
+                                    id="btnDisponibilidad"
+                                    data-precio-paquete="{{ destino.precio_base }}"
+                                    data-precio-noche="{{ alojamiento.precio_noche }}"
+                                    {% if vuelos %}
+                                        data-precio-ida="{{ vuelos[0].precio }}"
+                                        data-precio-vuelta="{{ vuelos[1].precio }}"
+                                    {% endif %}
+                                    class="btn btn-primary btn-block mt-3"
+                                    style="width: 100%;">
+                                    Ver Disponibilidad
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Modal Reserva -->
+                <div class="modal fade" id="modalReserva" tabindex="-1" aria-labelledby="moadalReserva" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moadalReserva">Reserva</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="border-bottom mb-3">
+                                    <h5>
+                                        <i class="fa fa-calendar-alt"></i>
+                                        <span>Fechas</span>
+                                    </h5>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="mb-3">
+                                            <span class="text-secondary d-block small" id="fechaDesdeDia"></span>
+                                            <strong class="fs-6 d-block" id="fechaDesde"></strong>
+                                        </div>
+                                        <div class="mb-3">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span class="text-secondary d-block small" id="fechaHastaDia"></span>
+                                            <strong class="fs-6 d-block" id="fechaHasta"></strong>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="border-bottom mb-3">
+                                    <h5>
+                                        <i class="fa fa-bed"></i>
+                                        <span>Hotel {{alojamiento.nombre}}</span>
+                                    </h5>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex justify-content-center">
+                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            </div>
+                                            <span class="ms-1">(2 suites)</span>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <h5>
+                                        <i class="fa fa-users"></i>
+                                        <span>Viajeros</span>
+                                    </h5>
+                                    <div class=" mb-3">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <span>Adultos (<span id="cantidadPasajerosModal"></span>):</span>
+                                            <strong class="text-dark"><sup>$</sup><span id="precioPasajeroModal"></span></strong>
+                                        </div>
+                                        <!-- <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <span>Niños (3):</span>
+                                            <strong class="text-dark"><sup>$</sup>751.50</strong>
+                                        </div> -->
+                                    </div>
+                                    
+                                    {% if vuelos %}
+                                    <h5>
+                                        <i class="fa fa-users"></i>
+                                        <span>Vuelo</span>
+                                    </h5>
+                                    <div class=" mb-3">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <span>Ida {{ vuelos[0].aerolinea.nombre }}:</span>
+                                            <strong class="text-dark"><sup>$</sup>{{ vuelos[0].precio | precio }}</strong>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <span>Vuelta {{ vuelos[1].aerolinea.nombre }}:</span>
+                                            <strong class="text-dark"><sup>$</sup>{{ vuelos[1].precio | precio }}</strong>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                     <h5>
+                                        <i class="fa fa-users"></i>
+                                        <span>Alojamiento</span>
+                                    </h5>
+                                    <div class=" mb-3">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <span>{{ alojamiento.nombre }}:</span>
+                                            <strong class="text-dark"><sup>$</sup>({{ alojamiento.precio_noche | precio }} / noche)</strong>
+                                        </div>
+                                    </div>
+        
+                                    <div class="text-end">
+                                        <div class="fw-bold-3 fs-2 text-dark">
+                                            <strong class="text-dark"><sup>$</sup><span id="totalReserva"></span></strong>
+                                        </div>
+                                        <p class="text-secondary small">* Todos los impuestos y tasas incluidos.</p>
+        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <a href="{{ url_for('checkout')}}" class="btn btn-primary">Reservar ahora</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Reserva -->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

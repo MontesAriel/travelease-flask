@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block title %}Destino{% endblock %}
+
+{% block extra_css %}
+<style>
+    .carousel-header {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+        <div class="container mt-5 mb-5 container-checkout">
+            <div class="ps-horizontal text-center pt-4 mb-5">
+                <ul class="row justify-content-center mb-0 list-unstyled position-relative">
+                    <li class="col-4">
+                        <div class="position-relative ps-item ps-status-done">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-checked">✓</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Carro de compra</h6>
+                        </div>
+                    </li>
+                    <li class="col-4">
+                        <div class="position-relative ps-item ps-status-process">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-preview">2</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Tu información</h6>
+                        </div>
+                    </li>
+                    <li class="col-4">
+                        <div class="position-relative ps-item">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout">3</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Pago</h6>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <h1 class="title fs-1">Checkout</h1>
+                <a href="./paquete-venecia.html" class="fw-bolder text-secondary">
+                    <i class="fas fa-arrow-left me-1" style="font-size: 14px;"></i> Volver atrás</a>
+            </div>
+
+            <div class="row g-0 g-xl-5 g-lg-4">
+                <div class="col-12 col-lg-6">
+                    <div class="mb-5">
+                        <div class="mb-2">
+                            <h3 class="title fs-4">Resumen del pedido</h3>
+                        </div>
+                        <div class="card order-summary">
+                            <div class="card-body">
+                                <div class="order-item mb-3 pb-2">
+                                    <h4 class="item-title fs-6 fw-bold-2">
+                                        <a>Paseo guiado en góndola por los canales de Venecia</a>
+                                    </h4>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                        </div>
+                                        <span class="ms-1">(2 suites)</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-calendar-alt"></i>
+                                        <span>Feb 28 2025 - Mar 02 2025</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-heart"></i>
+                                        <span>4 Adultos, 3 Niños</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <strong class="fs-6 text-dark">
+                                            <sup>$</sup>
+                                            425.50
+                                        </strong>
+                                    </div>       
+                                </div>
+                                <div class="order-item mb-3 pb-2">
+                                    <h4 class="item-title fs-6 fw-bold-2">
+                                        <a>Paseo guiado en góndola por los canales de Venecia</a>
+                                    </h4>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                        </div>
+                                        <span class="ms-1">(2 suites)</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-calendar-alt"></i>
+                                        <span>Feb 28 2025 - Mar 02 2025</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-heart"></i>
+                                        <span>4 Adultos, 3 Niños</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <strong class="fs-6 text-dark">
+                                            <sup>$</sup>
+                                            425.50
+                                        </strong>
+                                    </div>          
+                                </div>
+                                <div class="order-item mb-3 pb-2">
+                                    <h4 class="item-title fs-6 fw-bold-2">
+                                        <a>Paseo guiado en góndola por los canales de Venecia</a>
+                                    </h4>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                            <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
+                                        </div>
+                                        <span class="ms-1">(2 suites)</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-calendar-alt"></i>
+                                        <span>Feb 28 2025 - Mar 02 2025</span>
+                                    </div>
+                                    <div class="small mb-2">
+                                        <i class="fa fa-heart"></i>
+                                        <span>4 Adultos, 3 Niños</span>
+                                    </div>
+                                    <div class="item-price">
+                                        <strong class="fs-6 text-dark">
+                                            <sup>$</sup>
+                                            425.50
+                                        </strong>
+                                    </div>          
+                                </div>
+
+                                <div class="d-flex">
+                                    <h4 class="mt-2">Subtotal:</h4>
+                                    <div class="text-end mb-1 flex-grow-1">
+                                        <strong class=" fw-bold-4 fs-2 text-dark">
+                                            <sup>$</sup>
+                                            1,125.50
+                                        </strong>
+                                        <br>
+                                        <span class="text-secondary small">* Todos los impuestos y tasas incluidos.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <form class="mb-5 needs-validation mb-5" novalidate>
+                        <div class="mb-2">
+                            <h3 class="title fs-4">Tu información</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6 col-lg-12 col-md-6">
+                                <div class="mb-4">
+                                    <label for="name" class="mb-1">Nombre completo</label>
+                                    <input type="text" class="form-control form-control-lg shadow-sm" id="name" placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6 col-lg-12 col-md-6">
+                                <div class="mb-4">
+                                    <label for="email" class="mb-1">Email</label>
+                                    <input type="email" class="form-control form-control-lg shadow-sm" id="email" placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6 col-lg-12 col-md-6">
+                                <div class="mb-4">
+                                    <label for="country" class="mb-1">País</label>
+                                    <select class="form-control form-control-lg shadow-sm" id="country" data-dselect-size="1" data-dselect-search="true">
+                                        <option value="AR">Argentina</option>
+                                        <option value="BR">Brasil</option>
+                                        <option value="UR">Uruguay</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6 col-lg-12 col-md-6">
+                                <div class="mb-4">
+                                    <label for="phone" class="mb-1">Celular</label>
+                                    <input type="number" class="form-control form-control-lg shadow-sm" id="phone" placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <label class="mb-1">Solicitud (opcional)</label>
+                                    <textarea style="resize: none;" class="form-control form-control-lg shadow-sm"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="clearfix">
+                                    <a href="{{ url_for('payment')}}" class="btn btn-primary btn-lg" style="width: 100%;">próximo paso</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

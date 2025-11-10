@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Destino{% endblock %}
+
+{% block extra_css %}
+<style>
+    .carousel-header {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+        <div class="container mt-5 mb-5 container-checkout">
+            <div class="ps-horizontal text-center pt-4 mb-5">
+                <ul class="row justify-content-center mb-0 list-unstyled position-relative">
+                    <li class="col-4">
+                        <div class="position-relative ps-item ps-status-done">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-checked">✓</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Carro de compra</h6>
+                        </div>
+                    </li>
+                    <li class="col-4">
+                        <div class="position-relative ps-item ps-status-process">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-checked">✓</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Tu información</h6>
+                        </div>
+                    </li>
+                    <li class="col-4">
+                        <div class="position-relative ps-item">
+                            <div class="mb-0 mb-md-3">
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-checked">✓</span>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <h6 class="mb-2 text-secondary fw-bold-1">Pago</h6>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="heading text-center">
+                <h1 class="title fs-1">Reserva exitosa</h1>
+                <p>Su reserva fue enviada exitosamente. ¡Nos pondremos en contacto contigo muy pronto!</p>
+                <p>¡Gracias por tu reserva!</p>
+            </div>
+        </div>
+
+{% endblock %}
