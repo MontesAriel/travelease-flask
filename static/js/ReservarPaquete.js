@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnVerDisponibilidad = document.getElementById("btnDisponibilidad");
 
     btnVerDisponibilidad.addEventListener("click", () => {
-
         const fechaSalida = document.getElementById("fechaSalida").value;
         const fechaFin = document.getElementById("fechaFin").value;
         const pasajeros = parseInt(document.getElementById("cantidadPasajeros").value);
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("fechaDesdeDia").innerText = inicio.toLocaleDateString("es-AR", opcionesDia);
         document.getElementById("fechaDesde").innerText = inicio.toLocaleDateString("es-AR", opcionesFecha);
-
         document.getElementById("fechaHastaDia").innerText = fin.toLocaleDateString("es-AR", opcionesDia);
         document.getElementById("fechaHasta").innerText = fin.toLocaleDateString("es-AR", opcionesFecha);
 
@@ -31,12 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalAlojamiento = noches * precioNoche * pasajeros;
         const totalVuelo = (vueloIda + vueloVuelta) * pasajeros;
         const totalPaquete = precioPaquete * pasajeros;
-
         const totalReserva = totalAlojamiento + totalVuelo + totalPaquete;
 
+        // Mostrar en modal
         document.getElementById("totalReserva").innerText = totalReserva.toLocaleString("es-AR", { minimumFractionDigits: 2 });
         document.getElementById("cantidadPasajerosModal").innerText = pasajeros;
         document.getElementById("precioPasajeroModal").innerText = totalPaquete.toLocaleString("es-AR", { minimumFractionDigits: 2 });
 
+        // Cargar en formulario oculto
+        document.getElementById("inputFechaInicio").value = fechaSalida;
+        document.getElementById("inputFechaFin").value = fechaFin;
+        document.getElementById("inputPasajeros").value = pasajeros;
+        document.getElementById("inputPrecioTotal").value = totalReserva.toFixed(2);
     });
 });

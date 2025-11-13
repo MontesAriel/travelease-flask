@@ -74,7 +74,10 @@
                     </div> -->
 
                      <div class="border-bottom pb-5 mb-5">
-                        <h3>Alojamiento</h3>
+                        <h4>
+                            <i class="fa fa-hotel"></i>
+                            <span>Alojamiento</span>
+                        </h4>
                         <div class="list-unstyled lh-xl">
                             <h5>{{ alojamiento.nombre }}</h5>
                             <span>{{ alojamiento.precio_noche | precio }} / noche</span>
@@ -83,10 +86,10 @@
 
                     {% if vuelos %}
                     <div class="border-bottom pb-5 mb-5">
-                        <h3>
-                            <i class="fa fa-users"></i>
+                        <h4>
+                            <i class="fa fa-plane"></i>
                             <span>Vuelo</span>
-                        </h3>
+                        </h4>
                         <div class=" mb-3">
                             <div class="d-flex align-items-center justify-content-between mb-1">
                                 <span>Ida {{ vuelos[0].aerolinea.nombre }}:</span>
@@ -283,7 +286,7 @@
                                     
                                     {% if vuelos %}
                                     <h5>
-                                        <i class="fa fa-users"></i>
+                                        <i class="fa fa-plane"></i>
                                         <span>Vuelo</span>
                                     </h5>
                                     <div class=" mb-3">
@@ -299,7 +302,7 @@
                                     {% endif %}
 
                                      <h5>
-                                        <i class="fa fa-users"></i>
+                                        <i class="fa fa-bed"></i>
                                         <span>Alojamiento</span>
                                     </h5>
                                     <div class=" mb-3">
@@ -320,7 +323,13 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <a href="{{ url_for('checkout')}}" class="btn btn-primary">Reservar ahora</a>
+                               <form action="{{ url_for('crear_reserva', destino_id=destino.destino_id) }}" method="POST" id="formReserva">
+                                    <input type="hidden" name="fecha_inicio" id="inputFechaInicio">
+                                    <input type="hidden" name="fecha_fin" id="inputFechaFin">
+                                    <input type="hidden" name="pasajeros" id="inputPasajeros">
+                                    <input type="hidden" name="precio_total" id="inputPrecioTotal">
+                                    <button type="submit" class="btn btn-primary">Reservar ahora</button>
+                                </form>
                             </div>
                         </div>
                     </div>

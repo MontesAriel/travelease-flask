@@ -25,7 +25,7 @@
                             <h6 class="mb-2 text-secondary fw-bold-1">Carro de compra</h6>
                         </div>
                     </li>
-                    <li class="col-4">
+                    <!-- <li class="col-4">
                         <div class="position-relative ps-item ps-status-process">
                             <div class="mb-0 mb-md-3">
                                 <span class="d-inline-flex justify-content-center align-items-center circle-checkout-checked">✓</span>
@@ -34,11 +34,11 @@
                         <div class="d-none d-md-block">
                             <h6 class="mb-2 text-secondary fw-bold-1">Tu información</h6>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="col-4">
                         <div class="position-relative ps-item">
                             <div class="mb-0 mb-md-3">
-                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-preview">3</span>
+                                <span class="d-inline-flex justify-content-center align-items-center circle-checkout-preview">2</span>
                             </div>
                         </div>
                         <div class="d-none d-md-block">
@@ -48,11 +48,11 @@
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center justify-content-between mb-1">
+            <!-- <div class="d-flex align-items-center justify-content-between mb-1">
                 <h1 class="title fs-1">Checkout</h1>
                 <a href="./paquete-venecia.html" class="fw-bolder text-secondary">
                     <i class="fas fa-arrow-left me-1" style="font-size: 14px;"></i> Volver atrás</a>
-            </div>
+            </div> -->
 
 
                 <div class="row">
@@ -66,7 +66,7 @@
                                 <div class="card-body">
                                     <div class="order-item mb-3 pb-2">
                                         <h4 class="item-title fs-6 fw-bold-2">
-                                            <a>Louvre Museum Guided Tour with Skip the Line Entrance</a>
+                                            <span>Hotel: </span>{{ alojamiento.nombre }}
                                         </h4>
                                         <div class="d-flex align-items-center">
                                             <div class="d-flex justify-content-center">
@@ -80,76 +80,37 @@
                                         </div>
                                         <div class="small mb-2">
                                             <i class="fa fa-calendar-alt"></i>
-                                            <span>Feb 28 2025 - Mar 02 2025</span>
+                                            <span>{{ reserva.fecha_inicio.strftime("%d/%m/%Y") }} - {{ reserva.fecha_fin.strftime("%d/%m/%Y") }}</span>
                                         </div>
                                         <div class="small mb-2">
                                             <i class="fa fa-heart"></i>
-                                            <span>4 Adultos, 3 Niños</span>
+                                            <span>{{ reserva.pasajeros }} pasajeros</span>
+
                                         </div>
                                         <div class="item-price">
                                             <strong class="fs-6 text-dark">
-                                                <sup>$</sup>
-                                                425.50
+                                               <sup>$</sup>{{ alojamiento.precio_base | default(0) | precio }}
                                             </strong>
                                         </div>       
                                     </div>
                                     <div class="order-item mb-3 pb-2">
                                         <h4 class="item-title fs-6 fw-bold-2">
-                                            <a>Louvre Museum Guided Tour with Skip the Line Entrance</a>
+                                            <i class="fa fa-plane"></i>
+                                            <span>Vuelo ida y vuelta</span>
                                         </h4>
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex justify-content-center">
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                            </div>
-                                            <span class="ms-1">(2 suites)</span>
+                                        <div class="small mb-2">
+                                            <i class="bi bi-airplane-engines"></i>
+                                            <span>{{ vuelo_vuelta.destino.nombre }} → {{ vuelo_vuelta.origen.nombre }}</span>
                                         </div>
                                         <div class="small mb-2">
-                                            <i class="fa fa-calendar-alt"></i>
-                                            <span>Feb 28 2025 - Mar 02 2025</span>
-                                        </div>
-                                        <div class="small mb-2">
-                                            <i class="fa fa-heart"></i>
-                                            <span>4 Adultos, 3 Niños</span>
+                                            <i class="bi bi-calendar"></i>
+                                            <span>{{ vuelo_vuelta.fecha_salida.strftime("%d/%m/%Y") }} - {{ vuelo_ida.fecha_salida.strftime("%d/%m/%Y") }}</span>
                                         </div>
                                         <div class="item-price">
                                             <strong class="fs-6 text-dark">
-                                                <sup>$</sup>
-                                                425.50
+                                                <sup>$</sup>{{ ((vuelo_ida.precio or 0) + (vuelo_vuelta.precio or 0)) | precio }}
                                             </strong>
-                                        </div>          
-                                    </div>
-                                    <div class="order-item mb-3 pb-2">
-                                        <h4 class="item-title fs-6 fw-bold-2">
-                                            <a>Louvre Museum Guided Tour with Skip the Line Entrance</a>
-                                        </h4>
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex justify-content-center">
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                                <i class="fas fa-star text-warning" style="font-size: 14px;"></i>
-                                            </div>
-                                            <span class="ms-1">(2 suites)</span>
-                                        </div>
-                                        <div class="small mb-2">
-                                            <i class="fa fa-calendar-alt"></i>
-                                            <span>Feb 28 2025 - Mar 02 2025</span>
-                                        </div>
-                                        <div class="small mb-2">
-                                            <i class="fa fa-heart"></i>
-                                            <span>4 Adultos, 3 Niños</span>
-                                        </div>
-                                        <div class="item-price">
-                                            <strong class="fs-6 text-dark">
-                                                <sup>$</sup>
-                                                425.50
-                                            </strong>
-                                        </div>          
+                                        </div>               
                                     </div>
     
                                     <div class="d-flex">
@@ -157,7 +118,7 @@
                                         <div class="text-end mb-1 flex-grow-1">
                                             <strong class=" fw-bold-4 fs-2 text-dark">
                                                 <sup>$</sup>
-                                                1,125.50
+                                                {{ reserva.precio_total | default(0) | precio }}
                                             </strong>
                                             <br>
                                             <span class="text-secondary small">* Todos los impuestos y tasas incluidos.</span>
@@ -174,36 +135,26 @@
                                 <h3 class="title fs-4">Tu información</h3>
                             </div>
                            <div class="card">
-                                <div class="card-body">
+                               <div class="card-body">
                                     <div class="mb-3">
-                                        <label>Nombre completo:</label>
-                                        <br>
-                                        <strong>Ariel Montes</strong>
+                                        <label>Nombre completo:</label><br>
+                                        <strong>{{ usuario.nombre }}</strong>
                                     </div>
                                     <div class="mb-3">
-                                        <label>Email:</label>
-                                        <br>
-                                        <strong>ariel.montes@davinci.edu.ar</strong>
+                                        <label>Email:</label><br>
+                                        <strong>{{ usuario.email }}</strong>
                                     </div>
                                     <div class="mb-3">
-                                        <label>Celular:</label>
-                                        <br>
-                                        <strong>+54 011 8978-6756</strong>
+                                        <label>Celular:</label><br>
+                                        <strong>{{ usuario.telefono if usuario else '—' }}</strong>
                                     </div>
                                     <div class="mb-3">
-                                        <label>Dirección:</label>
-                                        <br>
-                                        <strong>Brandsen 805, La Boca</strong>
+                                        <label>Dirección:</label><br>
+                                        <strong>{{ usuario.direccion if usuario else '—' }}</strong>
                                     </div>
                                     <div class="mb-3">
-                                        <label>País:</label>
-                                        <br>
-                                        <strong>Argentina</strong>
-                                    </div>
-                                    <div>
-                                        <label>Sus solicitudes:</label>
-                                        <br>
-                                        <p class="fw-bolder">Necesito recoger a mi familia en el aeropuerto, prepararnos el desayuno en el hotel, facilitarnos un cochecito de bebé y un portaequipajes.</p>
+                                        <label>País:</label><br>
+                                        <strong>{{ usuario.pais if usuario else '—' }}</strong>
                                     </div>
                                 </div>
                            </div>
@@ -211,39 +162,39 @@
                     </div>
                     <!-- pago -->
                     <div class="col-12 col-xl-4 col-md-6">
-                        <form class="mb-5">
+                        <form action="{{ url_for('procesar_pago') }}" method="POST" class="mb-5">
                             <div class="mb-2">
                                 <h3 class="title fs-4">Métodos de pago</h3>
                             </div>
                             <div class="pb-2">
                                 <div class="pb-2">
                                     <figure class="mb-2">
-                                        <img src="../img/metodos-pago.png" class="img-fluid w-75" alt="Métodos de pago" >
+                                        <img src="{{ url_for('static', filename='img//metodos-pago.png') }}" class="img-fluid w-75" alt="Métodos de pago" >
                                     </figure>
                                     <p class="text-success p-pago"><i class="fas fa-lock me-1"></i>Paga Rápido y Seguro</p>         
                                 </div>
                                 <div class="mb-4">
                                     <span class="text-secondary fw-bold-1">Payment amount:</span>
                                     <br>
-                                    <strong class=" fw-bold-4 fs-2 text-dark"><sup>$</sup>1,125.50</strong>
+                                    <strong class=" fw-bold-4 fs-2 text-dark"><sup>$</sup>{{ reserva.precio_total | precio }}</strong>
                                 </div>
                                 <div class="form-check fw-bold-2 mb-3 d-flex">
-                                    <input type="radio" id="radio1" name="radiogroup">
-                                    <label class="form-check-label d-block ms-1" for="radio1">Pagar en efectivo</label>
+                                    <input type="radio" id="efectivo" name="metodo_pago" value="efectivo">
+                                    <label class="form-check-label d-block ms-1" for="efectivo">Pagar en efectivo</label>
                                 </div>
                                 <div class="form-check fw-bold-2 mb-3 d-flex">
-                                    <input  type="radio" id="radio2" name="radiogroup">
-                                    <label class="form-check-label d-block ms-1" for="radio2">Pagar con tarjeta de crédito</label>
+                                    <input type="radio" id="tarjeta" name="metodo_pago" value="tarjeta">
+                                    <label class="form-check-label d-block ms-1" for="tarjeta">Pagar con tarjeta de crédito</label>
                                 </div>
                                 <div class="form-check fw-bold-2 mb-3 d-flex">
-                                    <input type="radio" id="radio3" name="radiogroup">
-                                    <label class="form-check-label d-block ms-1" for="radio3">Pagar vía Paypal</label>
+                                    <input type="radio" id="paypal" name="metodo_pago" value="paypal">
+                                    <label class="form-check-label d-block ms-1" for="paypal">Pagar vía Paypal</label>
                                 </div>
                             </div>
                             <div class="mb-5 clearfix">
-                                <a href="{{ url_for('paymentSuccessful')}}" class="btn btn-primary btn-lg" style="width: 100%;">
+                                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
                                     Reservar ahora
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>
