@@ -109,6 +109,7 @@ v1.2.0	Estilo visual TravelEase + íconos Bootstrap + documentación actualizada
 #### 🔧 En Progreso
 ```bash
 - CRUD de vuelos, alojamientos, pagos, reservas, usuarios, aeropuertos, aerolineas...
+- Testing
 ```
 
 #### ⏳ Pendiente
