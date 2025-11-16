@@ -1,0 +1,45 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Alojamientos</h2>
+    
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_alojamiento_new') }}" class="btn btn-primary">+ Nuevo Alojamiento</a>
+    </div>
+    
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Destino</th>
+                    <th>Nombre</th>
+                    <th>Precio / noche</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for a in alojamientos %}
+                <tr>
+                    <td>{{ a.alojamiento_id }}</td>
+                    <td>{{ a.destino.nombre }}</td>
+                    <td>{{ a.nombre }}</td>
+                    <td>${{ a.precio_noche }}</td>
+                    <td>
+                        <img src="/static/img/alojamientos/{{ a.imagen }}" width="100" class="rounded">
+                    </td>
+                    <td>
+                        <a href="{{ url_for('admin_alojamientos_editar', alojamiento_id=a.alojamiento_id) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{{ url_for('admin_alojamientos_eliminar', alojamiento_id=a.alojamiento_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar alojamiento?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div> 
+
+{% endblock %}

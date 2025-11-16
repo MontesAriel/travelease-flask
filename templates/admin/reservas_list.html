@@ -1,0 +1,80 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Reservas{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Listado de Reservas</h2>
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_reserva_new') }}" class="btn btn-primary">+ Nueva Reserva</a>
+    </div>
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+            <thead class="table table-hover align-middle text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Alojamiento</th>
+                    <th>Vuelo Ida</th>
+                    <th>Vuelo Vuelta</th>
+                    <th>Fechas</th>
+                    <th>Pasajeros</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for r in reservas %}
+                <tr>
+                    <td>{{ r.reserva_id }}</td>
+                    <td>{{ r.usuario.nombre }} {{ r.usuario.apellido }}</td>
+
+                    <td>
+                        {% if r.alojamiento %}
+                            {{ r.alojamiento.nombre }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if r.vuelo_ida %}
+                            {{ r.vuelo_ida.codigo }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if r.vuelo_vuelta %}
+                            {{ r.vuelo_vuelta.codigo }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ r.fecha_inicio }} → {{ r.fecha_fin }}
+                    </td>
+
+                    <td>{{ r.pasajeros }}</td>
+                    <td>${{ r.precio_total }}</td>
+                    <td>{{ r.estado }}</td>
+
+                    <td>
+                        <a href="{{ url_for('admin_reserva_edit', reserva_id=r.reserva_id) }}"
+                        class="btn btn-primary btn-sm">Editar</a>
+
+                        <a href="{{ url_for('admin_reserva_delete', reserva_id=r.reserva_id) }}"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock %}

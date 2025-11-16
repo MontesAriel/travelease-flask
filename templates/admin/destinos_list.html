@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="container mt-5 pt-5">
+<div class="container">
 
     <h2 class="text-center mb-4 section-title">Destinos</h2>
 
@@ -22,6 +22,7 @@
                 <tr class="text-center">
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Provincia</th>
                     <th>Precio base</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
@@ -33,10 +34,11 @@
                 <tr class="text-center">
                     <td>{{ d.destino_id }}</td>
                     <td>{{ d.nombre }}</td>
+                    <td>{{ d.provincia.nombre if d.provincia else 'Sin provincia' }}</td>
                     <td>${{ d.precio_base }}</td>
                     <td>
                         {% if d.imagen %}
-                        <img src="/{{ d.imagen }}" width="100" class="rounded">
+                        <img src="../static/img/destinos/{{ d.imagen }}" width="100" height="100" class="rounded">
                         {% else %}
                         <span class="text-muted">Sin imagen</span>
                         {% endif %}

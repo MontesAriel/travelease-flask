@@ -1,0 +1,59 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}{{ 'Editar Aeropuerto' if aeropuerto else 'Nuevo Aeropuerto' }}{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">{{ 'Editar Aeropuerto' if aeropuerto else 'Nuevo Aeropuerto' }}</h2>
+
+<div class="shadow-sm bg-white p-4 rounded">
+
+    <form action="{{ url_for('admin_aeropuerto_update', aeropuerto_id=aeropuerto.aeropuerto_id) if aeropuerto else url_for('admin_aeropuerto_create') }}"
+          method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Código</label>
+            <input type="text" name="codigo" class="form-control"
+                   required
+                   value="{{ aeropuerto.codigo if aeropuerto else '' }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control"
+                   required
+                   value="{{ aeropuerto.nombre if aeropuerto else '' }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ciudad</label>
+            <input type="text" name="ciudad" class="form-control"
+                   required
+                   value="{{ aeropuerto.ciudad if aeropuerto else '' }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Provincia</label>
+            <select name="provincia_id" class="form-select" required>
+                <option value="">-- seleccionar --</option>
+                {% for p in provincias %}
+                <option value="{{ p.provincia_id }}"
+                    {% if aeropuerto and aeropuerto.provincia_id == p.provincia_id %}selected{% endif %}>
+                    {{ p.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            {{ 'Actualizar' if aeropuerto else 'Crear' }}
+        </button>
+
+        <a href="{{ url_for('admin_aeropuertos') }}" class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

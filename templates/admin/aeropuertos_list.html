@@ -1,0 +1,65 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Aeropuertos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Aeropuertos</h2>
+
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_aeropuerto_new') }}" class="btn btn-primary">
+            + Nuevo Aeropuerto
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Provincia</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in aeropuertos %}
+                <tr>
+                    <td>{{ a.aeropuerto_id }}</td>
+                    <td>{{ a.codigo }}</td>
+                    <td>{{ a.nombre }}</td>
+                    <td>{{ a.ciudad }}</td>
+
+                    <td>
+                        {{ a.provincia.nombre if a.provincia else '—' }}
+                    </td>
+
+                    <td>
+                        <a href="{{ url_for('admin_aeropuerto_edit', aeropuerto_id=a.aeropuerto_id) }}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+
+                        <a href="{{ url_for('admin_aeropuerto_delete', aeropuerto_id=a.aeropuerto_id) }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Eliminar aeropuerto?')">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay aeropuertos cargados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

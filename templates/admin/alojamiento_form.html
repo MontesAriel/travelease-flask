@@ -1,0 +1,36 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+
+<h2>{{ "Editar Alojamiento" if alojamiento else "Nuevo Alojamiento" }}</h2>
+
+<form action="{{ url_for('admin_alojamientos_update', alojamiento_id=alojamiento.alojamiento_id) if alojamiento else url_for('admin_alojamiento_create') }}" method="POST">
+
+    <label>Destino</label>
+    <select name="destino_id" class="form-select" required>
+        {% for d in destinos %}
+            <option value="{{ d.destino_id }}"
+                {% if alojamiento and alojamiento.destino_id == d.destino_id %}selected{% endif %}>
+                {{ d.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Nombre</label>
+    <input type="text" name="nombre" class="form-control" value="{{ alojamiento.nombre if alojamiento else '' }}" required>
+
+    <label>Descripción</label>
+    <textarea name="descripcion" class="form-control" required>{{ alojamiento.descripcion if alojamiento else '' }}</textarea>
+
+    <label>Precio por noche</label>
+    <input type="number" step="0.01" name="precio_noche" class="form-control" value="{{ alojamiento.precio_noche if alojamiento else '' }}" required>
+
+    <label>Imagen</label>
+    <input type="text" name="imagen" class="form-control" value="{{ alojamiento.imagen if alojamiento else '' }}" required>
+
+    <button class="btn btn-primary mt-3" type="submit">
+        {{ "Actualizar" if alojamiento else "Guardar" }}
+    </button>
+
+</form>
+
+{% endblock %}

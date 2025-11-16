@@ -1,0 +1,47 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Pagos{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Listado de Pagos</h2>
+    
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_pago_new') }}" class="btn btn-primary">+ Nuevo Pago</a>
+    </div>
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Reserva</th>
+                    <th>Método</th>
+                    <th>Estado</th>
+                    <th>Monto</th>
+                    <th>Fecha de Pago</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for pago in pagos %}
+                <tr>
+                    <td>{{ pago.pago_id }}</td>
+                    <td>{{ pago.reserva_id }}</td>
+                    <td>{{ pago.metodo }}</td>
+                    <td>{{ pago.estado }}</td>
+                    <td>${{ "%.2f"|format(pago.monto) }}</td>
+                    <td>{{ pago.fecha_pago.strftime('%d/%m/%Y %H:%M') }}</td>
+    
+                    <td>
+                        <a href="{{ url_for('admin_pago_edit', pago_id=pago.pago_id) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{{ url_for('admin_pago_delete', pago_id=pago.pago_id) }}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Estás seguro de eliminar este pago?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

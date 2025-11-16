@@ -21,6 +21,8 @@ class Provincia(db.Model):
     provincia_id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     pais_id = db.Column(db.Integer, db.ForeignKey("pais.pais_id"))
+    pais = db.relationship("Pais") 
+    destinos = db.relationship("Destino", back_populates="provincia")
 
 
 class Destino(db.Model):
@@ -36,6 +38,9 @@ class Destino(db.Model):
     incluye = db.relationship("IncluyeDestino", backref="destino", cascade="all, delete")
     itinerario = db.relationship("ItinerarioDestino", backref="destino", cascade="all, delete")
     vuelos = db.relationship("PaqueteVuelo", backref="destino")
+    alojamientos = db.relationship("Alojamiento", back_populates="destino")
+    provincia = db.relationship("Provincia", back_populates="destinos")
+
 
 
 class ItinerarioDestino(db.Model):
@@ -71,7 +76,7 @@ class Aeropuerto(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     ciudad = db.Column(db.String(50), nullable=False)
     provincia_id = db.Column(db.Integer, db.ForeignKey("provincia.provincia_id"))
-
+    provincia = db.relationship("Provincia")
 
 class Aerolinea(db.Model):
     __tablename__ = "aerolinea"
@@ -79,7 +84,7 @@ class Aerolinea(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     codigo = db.Column(db.String(10), unique=True, nullable=False)
     pais_id = db.Column(db.Integer, db.ForeignKey("pais.pais_id"))
-
+    pais = db.relationship("Pais")
 
 class Vuelo(db.Model):
     __tablename__ = "vuelo"
@@ -95,6 +100,10 @@ class Vuelo(db.Model):
     aerolinea = db.relationship("Aerolinea")
     origen = db.relationship("Aeropuerto", foreign_keys=[origen_id])
     destino = db.relationship("Aeropuerto", foreign_keys=[destino_id])
+    @property
+    def codigo(self):
+        return f"{self.aerolinea.codigo}{self.vuelo_id}"
+    
 
 class PaqueteVuelo(db.Model):
     __tablename__ = "paquete_vuelo"
@@ -115,6 +124,7 @@ class Alojamiento(db.Model):
     precio_noche = db.Column(db.Numeric(10, 2), nullable=False)
     imagen = db.Column(db.String(255), nullable=False)
     imagenes = db.relationship("ImagenAlojamiento", backref="alojamiento", cascade="all, delete")
+    destino = db.relationship("Destino", back_populates="alojamientos")
 
 
 class ImagenAlojamiento(db.Model):
@@ -137,7 +147,10 @@ class Reserva(db.Model):
     pasajeros = db.Column(db.Integer)
     precio_total = db.Column(db.Numeric(10, 2))
     estado = db.Column(db.String(30), default="pendiente")
-
+    usuario = db.relationship("Usuario", backref="reservas")
+    alojamiento = db.relationship("Alojamiento", backref="reservas")
+    vuelo_ida = db.relationship("Vuelo", foreign_keys=[vuelo_ida_id])
+    vuelo_vuelta = db.relationship("Vuelo", foreign_keys=[vuelo_vuelta_id])
 
 
 class Pago(db.Model):

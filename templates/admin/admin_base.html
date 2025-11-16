@@ -27,43 +27,74 @@
 
 <nav class="admin-navbar">
     <h2>TravelEase Admin</h2>
-    <a href="/">Volver al sitio</a>
+    <a href="/" class="text-light">Volver al sitio</a>
 </nav>
 
 <div class="admin-container">
     <aside class="admin-sidebar">
-        <ul>
-            <li>
-                <a href="{{ url_for('admin_dashboard') }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
-            </li>
+    <ul>
+        <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+        </li>
 
-            <li>
-                <a href="{{ url_for('admin_destinos') }}">
-                    <i class="bi bi-geo-alt"></i> Destinos
-                </a>
-            </li>
+        <li>
+            <a href="{{ url_for('admin_destinos') }}">
+                <i class="bi bi-geo-alt"></i> Destinos
+            </a>
+        </li>
 
-            <li>
-                <a href="#">
-                    <i class="bi bi-building"></i> Alojamientos
-                </a>
-            </li>
+        <li>
+            <a href="{{ url_for('admin_alojamientos') }}">
+                <i class="bi bi-building"></i> Alojamientos
+            </a>
+        </li>
 
-            <li>
-                <a href="#">
-                    <i class="bi bi-airplane"></i> Vuelos
-                </a>
-            </li>
+        <li>
+            <a href="{{ url_for('admin_vuelos') }}">
+                <i class="bi bi-airplane"></i> Vuelos
+            </a>
+        </li>
 
-            <li>
-                <a href="#">
-                    <i class="bi bi-wallet2"></i> Pagos
-                </a>
-            </li>
-        </ul>
+        <li>
+            <a href="{{ url_for('admin_pagos') }}">
+                <i class="bi bi-credit-card"></i> Pagos
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_paises') }}">
+                <i class="bi bi-globe"></i> Paises
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_provincias') }}">
+                <i class="bi bi-map"></i> Provincias
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_aeropuertos') }}">
+                <i class="bi bi-pin-map"></i> Aeropuertos
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_aerolineas') }}">
+                <i class="bi bi-airplane-engines"></i> Aerolineas
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_reservas') }}">
+                <i class="bi bi-clipboard-check"></i> Reservas
+            </a>
+        </li>
+    </ul>
     </aside>
+
 
     <main class="admin-content">
         {% block content %}

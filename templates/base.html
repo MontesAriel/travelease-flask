@@ -24,7 +24,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
     {% block extra_css %}{% endblock %}
+    <script>
+        const SHOW_MODAL = "{{ session.get('show_modal') or '' }}";
+        const CLEAR_MODAL_URL = "{{ url_for('clear_modal_flag') }}";
+    </script>
+
     <script src="{{ url_for('static', filename='js/ReservarPaquete.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Login.js') }}"></script>
 
 </head>
 <body>
@@ -48,7 +54,22 @@
                     <a href="./packages.html" class="nav-item nav-link">Alojamientos</a>
                     <a href="{{ url_for('contact')}}" class="nav-item nav-link">Contacto</a>
                 </div>
-                <button  type="button" data-bs-toggle="modal" data-bs-target="#modalLogin" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Registrarse</button>
+               {% if username %}
+                    <div class="dropdown">
+                        <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                aria-expanded="false" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">
+                            Hola {{ username }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalLogin"
+                            class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">
+                        Registrarse
+                    </button>
+                {% endif %}
             </div>
         </nav>
             
@@ -87,6 +108,14 @@
                                                     <input type="checkbox" name="remember" id="remember-login"> 
                                                     <label for="remember-login" class="text-muted">Recuerdame</label> 
                                                 </div>
+                                                {% with mensajes = get_flashed_messages() %}
+                                                    {% if mensajes %}
+                                                        <div class="alert alert-danger py-2 text-center">
+                                                            {{ mensajes[0] }}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endwith %}
+
                                                 <button type="submit" class="btn btn-primary btn-block mt-3 btn-login">Login</button>
                                                 <div class="text-center pt-4 text-muted">¿No tienes una cuenta?  
                                                     <button 

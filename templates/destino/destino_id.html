@@ -78,9 +78,12 @@
                             <i class="fa fa-hotel"></i>
                             <span>Alojamiento</span>
                         </h4>
-                        <div class="list-unstyled lh-xl">
-                            <h5>{{ alojamiento.nombre }}</h5>
-                            <span>{{ alojamiento.precio_noche | precio }} / noche</span>
+                        <div class="list-unstyled lh-xl d-flex justify-content-between">
+                            <div>
+                                <h5>{{ alojamiento.nombre }}</h5>
+                                <span>{{ alojamiento.precio_noche | precio }} / noche</span>
+                            </div>
+                            <img src="{{ url_for('static', filename='img/alojamientos/' ~ alojamiento.imagen) }}"  class="d-block w-50 img-fluid rounded shadow-sm" alt="{{alojamiento.nombre}}" />
                         </div>
                     </div>
 

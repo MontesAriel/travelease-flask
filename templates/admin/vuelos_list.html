@@ -1,0 +1,78 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Vuelos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Vuelos</h2>
+    
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_vuelo_new') }}" class="btn btn-primary">
+            + Nuevo Vuelo
+        </a>
+    </div>
+    
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+    
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aerolínea</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Salida</th>
+                    <th>Llegada</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for v in vuelos %}
+                <tr>
+                    <td>{{ v.vuelo_id }}</td>
+                    <td>{{ v.aerolinea.nombre if v.aerolinea else '—' }}</td>
+    
+                    <td>
+                        {{ v.origen.nombre if v.origen else '—' }}  
+                        <br>
+                        <small class="text-muted">{{ v.origen.ciudad if v.origen else '' }}</small>
+                    </td>
+    
+                    <td>
+                        {{ v.destino.nombre if v.destino else '—' }}
+                        <br>
+                        <small class="text-muted">{{ v.destino.ciudad if v.destino else '' }}</small>
+                    </td>
+    
+                    <td>{{ v.fecha_salida.strftime("%d/%m/%Y %H:%M") }}</td>
+                    <td>{{ v.fecha_llegada.strftime("%d/%m/%Y %H:%M") }}</td>
+    
+                    <td>${{ v.precio }}</td>
+    
+                    <td>
+                        <a href="{{ url_for('admin_vuelo_edit', vuelo_id=v.vuelo_id) }}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+    
+                        <a href="{{ url_for('admin_vuelo_delete', vuelo_id=v.vuelo_id) }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Eliminar vuelo?')">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center text-muted">No hay vuelos cargados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    
+        </table>
+    </div>
+</div>
+
+{% endblock %}

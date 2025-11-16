@@ -1,0 +1,60 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Aerolíneas{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Aerolíneas</h2>
+
+    <div class="text-end mb-3">
+        <a href="{{ url_for('admin_aerolinea_new') }}" class="btn btn-primary">
+            + Nueva Aerolínea
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th>País</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in aerolineas %}
+                <tr>
+                    <td>{{ a.aerolinea_id }}</td>
+                    <td>{{ a.nombre }}</td>
+                    <td>{{ a.codigo }}</td>
+                    <td>{{ a.pais.nombre if a.pais else '—' }}</td>
+
+                    <td>
+                        <a href="{{ url_for('admin_aerolinea_edit', aerolinea_id=a.aerolinea_id) }}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+
+                        <a href="{{ url_for('admin_aerolinea_delete', aerolinea_id=a.aerolinea_id) }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Eliminar aerolínea?')">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No hay aerolíneas cargadas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

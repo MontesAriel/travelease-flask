@@ -1,0 +1,34 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}{{ "Editar Provincia" if provincia else "Nueva Provincia" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ "Editar Provincia" if provincia else "Nueva Provincia" }}</h2>
+
+    <form action="{{ url_for('admin_provincia_update', provincia_id=provincia.provincia_id) if provincia else url_for('admin_provincia_create') }}" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" value="{{ provincia.nombre if provincia else '' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">País</label>
+            <select name="pais_id" class="form-select">
+                <option value="">-- seleccionar país --</option>
+                {% for pa in paises %}
+                    <option value="{{ pa.pais_id }}" {% if provincia and provincia.pais_id == pa.pais_id %}selected{% endif %}>
+                        {{ pa.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit">
+                {{ "Actualizar" if provincia else "Guardar" }}
+            </button>
+            <a href="{{ url_for('admin_provincias') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,23 +1,37 @@
 {% extends "admin/admin_base.html" %}
 {% block title %}panel{% endblock %}
 
-{% block extra_css %}
-{% endblock %}
-
 {% block content %}
 
 <h2>{{ "Editar Destino" if destino else "Nuevo Destino" }}</h2>
 
-<form action="{{ url_for('admin_destinos_update', destino_id=destino.destino_id) if destino else url_for('admin_destino_create') }}" method="POST">
+<form action="{{ url_for('admin_destinos_update', destino_id=destino.destino_id) if destino else url_for('admin_destino_create') }}" 
+      method="POST">
 
-    <label>Nombre</label>
-    <input type="text" name="nombre" value="{{ destino.nombre if destino else '' }}" required>
+    <label>Provincia</label>
+    <select name="provincia_id" class="form-select" required>
+        {% for p in provincias %}
+            <option value="{{ p.provincia_id }}"
+                {% if destino and destino.provincia_id == p.provincia_id %}selected{% endif %}>
+                {{ p.nombre }}
+            </option>
+        {% endfor %}
+    </select>
 
-    <label>Precio base</label>
-    <input type="number" name="precio" step="0.01" value="{{ destino.precio_base if destino else '' }}" required>
+    <label class="mt-2">Nombre</label>
+    <input type="text" name="nombre" class="form-control"
+           value="{{ destino.nombre if destino else '' }}" required>
 
-    <label>Imagen (ruta)</label>
-    <input type="text" name="imagen" value="{{ destino.imagen if destino else '' }}" required>
+    <label class="mt-2">Descripción</label>
+    <textarea name="descripcion" class="form-control" required>{{ destino.descripcion if destino else '' }}</textarea>
+
+    <label class="mt-2">Precio base</label>
+    <input type="number" step="0.01" name="precio" class="form-control"
+           value="{{ destino.precio_base if destino else '' }}" required>
+
+    <label class="mt-2">Imagen (ruta)</label>
+    <input type="text" name="imagen" class="form-control"
+           value="{{ destino.imagen if destino else '' }}" required>
 
     <button type="submit" class="btn btn-primary mt-3">
         {{ "Actualizar" if destino else "Guardar" }}

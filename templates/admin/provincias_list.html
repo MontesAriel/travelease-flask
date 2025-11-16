@@ -1,0 +1,41 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Provincias{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4 section-title">Provincias</h2>
+     <div class="text-end mb-3">
+        <a href="{{ url_for('admin_provincia_new') }}" class="btn btn-primary">+ Nueva Provincia</a>
+    </div>
+
+    <div class="table-responsive shadow-sm p-3 bg-white rounded">
+        <table class="table table-hover align-middle text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>País</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in provincias %}
+                <tr>
+                    <td>{{ p.provincia_id }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.pais.nombre if p.pais_id and p.pais else '—' }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_provincia_editar', provincia_id=p.provincia_id) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{{ url_for('admin_provincia_eliminar', provincia_id=p.provincia_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar provincia?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">No hay provincias.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
