@@ -102,13 +102,12 @@ v1.2.0	Estilo visual TravelEase + íconos Bootstrap + documentación actualizada
   - Registro / Login
   - Reserva
   - Pago
-- CRUD de destinos (panel admin)
+- CRUD de destinos, vuelos, alojamientos, pagos, reservas, usuarios, aeropuertos, aerolineas (panel admin)
 - Documentación técnica y README actualizados
 ```
 
 #### 🔧 En Progreso
 ```bash
-- CRUD de vuelos, alojamientos, pagos, reservas, usuarios, aeropuertos, aerolineas...
 - Testing
 ```
 
