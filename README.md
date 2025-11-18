@@ -10,7 +10,7 @@ El proyecto fue desarrollado como trabajo práctico integrador para la materia *
 | Componente | Tecnología |
 |-------------|-------------|
 | **Backend** | Python 3.12 + Flask |
-| **Base de Datos** | PostgreSQL |
+| **Base de Datos** | Mysql |
 | **ORM** | SQLAlchemy |
 | **Frontend** | HTML, CSS (Bootstrap 5.3), JS |
 | **Autenticación** | Flask-Bcrypt + Sesiones |
