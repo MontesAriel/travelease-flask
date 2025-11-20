@@ -51,6 +51,36 @@
             </div>
         </div>
 
+        <div class="col mt-3">
+            <label class="form-label">Tipo de vuelo</label>
+            <select name="tipo_vuelo" id="tipo_vuelo" class="form-select" required>
+                <option value="">-- seleccionar tipo --</option>
+
+                <option value="ida"
+                    {% if paquete and paquete.tipo == "ida" %}selected{% endif %}>
+                    Ida
+                </option>
+
+                <option value="vuelta"
+                    {% if not paquete or paquete.tipo == "vuelta" %}selected{% endif %}>
+                    Vuelta
+                </option>
+            </select>
+        </div>
+
+        <div class="col mt-3" id="destino_turistico_box">
+            <label class="form-label">Destino Turístico</label>
+            <select name="destino_turistico_id" class="form-select">
+                <option value="">-- seleccionar destino --</option>
+                {% for d in destinos %}
+                <option value="{{ d.destino_id }}"
+                        {% if paquete and paquete.destino_id == d.destino_id %}selected{% endif %}>
+                    {{ d.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
         <div class="row mb-3">
             <div class="col">
                 <label class="form-label">Fecha de salida</label>
@@ -85,5 +115,21 @@
     </form>
 
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tipoSelect = document.getElementById("tipo_vuelo");
+    const destinoBox = document.getElementById("destino_turistico_box");
 
+    function actualizar() {
+        if (tipoSelect.value === "ida") {
+            destinoBox.style.display = "block";
+        } else {
+            destinoBox.style.display = "none";
+        }
+    }
+
+    tipoSelect.addEventListener("change", actualizar);
+    actualizar();
+});
+</script>
 {% endblock %}

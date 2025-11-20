@@ -80,10 +80,21 @@
                         </h4>
                         <div class="list-unstyled lh-xl d-flex justify-content-between">
                             <div>
-                                <h5>{{ alojamiento.nombre }}</h5>
-                                <span>{{ alojamiento.precio_noche | precio }} / noche</span>
+                                <select id="alojamientoSelect" class="form-select">
+                                    {% for alo in alojamientos %}
+                                        <option value="{{ alo.alojamiento_id }}"
+                                                data-precio="{{ alo.precio_noche }}"
+                                                data-imagen="{{ alo.imagen }}">
+                                            {{ alo.nombre }} - ${{ alo.precio_noche | precio }} / noche
+                                        </option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <img src="{{ url_for('static', filename='img/alojamientos/' ~ alojamiento.imagen) }}"  class="d-block w-50 img-fluid rounded shadow-sm" alt="{{alojamiento.nombre}}" />
+
+                            <img id="alojamientoImagen"
+                                src="{{ url_for('static', filename='img/alojamientos/' ~ alojamientos[0].imagen) }}"
+                                class="d-block w-50 img-fluid rounded shadow-sm"
+                                alt="{{ alojamientos[0].nombre }}" />
                         </div>
                     </div>
 
@@ -94,13 +105,29 @@
                             <span>Vuelo</span>
                         </h4>
                         <div class=" mb-3">
+                            <h5>Ida</h5>
                             <div class="d-flex align-items-center justify-content-between mb-1">
-                                <span>Ida {{ vuelos[0].aerolinea.nombre }}:</span>
-                                <strong class="text-dark"><sup>$</sup>{{ vuelos[0].precio | precio }}</strong>
+                               <select id="vueloIdaSelect" class="form-select mt-2">
+                                    {% for pv in vuelos_ida %}
+                                        <option value="{{ pv.vuelo.vuelo_id }}"
+                                                data-precio="{{ pv.vuelo.precio }}">
+                                            {{ pv.vuelo.aerolinea.nombre }} - {{ pv.vuelo.origen.codigo }} → {{ pv.vuelo.destino.codigo }}
+                                            - ${{ pv.vuelo.precio | precio }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
                             </div>
+                            <h5>Vuelta</h5>
                             <div class="d-flex align-items-center justify-content-between mb-1">
-                                <span>Vuelta {{ vuelos[1].aerolinea.nombre }}:</span>
-                                <strong class="text-dark"><sup>$</sup>{{ vuelos[1].precio | precio }}</strong>
+                               <select id="vueloVueltaSelect" class="form-select mt-2">
+                                    {% for pv in vuelos_vuelta %}
+                                        <option value="{{ pv.vuelo.vuelo_id }}"
+                                                data-precio="{{ pv.vuelo.precio }}">
+                                            {{ pv.vuelo.aerolinea.nombre }} - {{ pv.vuelo.origen.codigo }} → {{ pv.vuelo.destino.codigo }}
+                                            - ${{ pv.vuelo.precio | precio }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -204,15 +231,8 @@
                                 </div>
                                <button 
                                     type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalReserva"
                                     id="btnDisponibilidad"
                                     data-precio-paquete="{{ destino.precio_base }}"
-                                    data-precio-noche="{{ alojamiento.precio_noche }}"
-                                    {% if vuelos %}
-                                        data-precio-ida="{{ vuelos[0].precio }}"
-                                        data-precio-vuelta="{{ vuelos[1].precio }}"
-                                    {% endif %}
                                     class="btn btn-primary btn-block mt-3"
                                     style="width: 100%;">
                                     Ver Disponibilidad
@@ -254,7 +274,7 @@
                                 <div class="border-bottom mb-3">
                                     <h5>
                                         <i class="fa fa-bed"></i>
-                                        <span>Hotel {{alojamiento.nombre}}</span>
+                                        <span id="modalAlojamientoNombre"></span>
                                     </h5>
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="d-flex align-items-center">
@@ -288,18 +308,15 @@
                                     </div>
                                     
                                     {% if vuelos %}
-                                    <h5>
-                                        <i class="fa fa-plane"></i>
-                                        <span>Vuelo</span>
-                                    </h5>
-                                    <div class=" mb-3">
+                                   <h5><i class="fa fa-plane"></i> <span>Vuelo</span></h5>
+                                    <div class="mb-3">
                                         <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span>Ida {{ vuelos[0].aerolinea.nombre }}:</span>
-                                            <strong class="text-dark"><sup>$</sup>{{ vuelos[0].precio | precio }}</strong>
+                                            <span id="vueloIdaTexto"></span>
+                                            <strong class="text-dark"><sup>$</sup><span id="vueloIdaPrecio"></span></strong>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span>Vuelta {{ vuelos[1].aerolinea.nombre }}:</span>
-                                            <strong class="text-dark"><sup>$</sup>{{ vuelos[1].precio | precio }}</strong>
+                                            <span id="vueloVueltaTexto"></span>
+                                            <strong class="text-dark"><sup>$</sup><span id="vueloVueltaPrecio"></span></strong>
                                         </div>
                                     </div>
                                     {% endif %}
@@ -310,8 +327,8 @@
                                     </h5>
                                     <div class=" mb-3">
                                         <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span>{{ alojamiento.nombre }}:</span>
-                                            <strong class="text-dark"><sup>$</sup>({{ alojamiento.precio_noche | precio }} / noche)</strong>
+                                            <span id="modalAlojamientoTexto"></span>
+                                            <strong class="text-dark"><sup>$</sup><span id="modalAlojamientoPrecio"></span></strong>
                                         </div>
                                     </div>
         
@@ -331,6 +348,11 @@
                                     <input type="hidden" name="fecha_fin" id="inputFechaFin">
                                     <input type="hidden" name="pasajeros" id="inputPasajeros">
                                     <input type="hidden" name="precio_total" id="inputPrecioTotal">
+
+                                    <input type="hidden" name="alojamiento_id" id="inputAlojamiento">
+                                    <input type="hidden" name="vuelo_ida_id" id="inputVueloIda">
+                                    <input type="hidden" name="vuelo_vuelta_id" id="inputVueloVuelta">
+
                                     <button type="submit" class="btn btn-primary">Reservar ahora</button>
                                 </form>
                             </div>

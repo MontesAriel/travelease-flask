@@ -25,7 +25,7 @@
             </thead>
 
             <tbody>
-                {% for r in reservas %}
+                {% for r in reservas.items %}
                 <tr>
                     <td>{{ r.reserva_id }}</td>
                     <td>{{ r.usuario.nombre }} {{ r.usuario.apellido }}</td>
@@ -73,6 +73,38 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            <!-- PAGINACIÓN -->
+            <nav aria-label="Paginación de Reservas">
+                <ul class="pagination justify-content-center mt-3">
+
+                    {% if reservas.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('admin_reservas', page=reservas.prev_num) }}">Anterior</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Anterior</span>
+                    </li>
+                    {% endif %}
+
+                    {% for p in range(1, reservas.pages + 1) %}
+                    <li class="page-item {% if p == reservas.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('admin_reservas', page=p) }}">{{ p }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if reservas.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('admin_reservas', page=reservas.next_num) }}">Siguiente</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Siguiente</span>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
 
         </table>
     </div>

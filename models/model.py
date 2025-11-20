@@ -92,7 +92,7 @@ class Vuelo(db.Model):
     vuelo_id = db.Column(db.Integer, primary_key=True)
     aerolinea_id = db.Column(db.Integer, db.ForeignKey("aerolinea.aerolinea_id"))
     origen_id = db.Column(db.Integer, db.ForeignKey("aeropuerto.aeropuerto_id"))
-    destino_id = db.Column(db.Integer, db.ForeignKey("aeropuerto.aeropuerto_id"))  # cambio acá
+    destino_id = db.Column(db.Integer, db.ForeignKey("aeropuerto.aeropuerto_id"))
     fecha_salida = db.Column(db.DateTime, nullable=False)
     fecha_llegada = db.Column(db.DateTime, nullable=False)
     precio = db.Column(db.Numeric(10, 2), nullable=False)
@@ -111,7 +111,7 @@ class PaqueteVuelo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     destino_id = db.Column(db.Integer, db.ForeignKey("destino.destino_id"))
     vuelo_id = db.Column(db.Integer, db.ForeignKey("vuelo.vuelo_id"))
-    tipo = db.Column(db.String(10), nullable=False)  # "ida" o "vuelta"
+    tipo = db.Column(db.String(10), nullable=False)
     vuelo = db.relationship("Vuelo")
 
 

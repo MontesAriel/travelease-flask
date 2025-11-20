@@ -130,7 +130,7 @@ h3 {
     font-family: 'Roboto', sans-serif;
     position: relative;
     padding: 35px 15px;
-    color: var(--bs-white) !important;
+    color: var(--bs-white);
     font-size: 17px;
     font-weight: 400;
     outline: none;
@@ -147,14 +147,10 @@ h3 {
     transition: .5s;
 }
 
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link.active {
-    color: var(--bs-white) !important;
-}
 
 .navbar-pages .navbar-nav .nav-link:hover,
 .navbar-pages .navbar-nav .nav-link.active {
-    color: var(--bs-orange) !important;
+    color: var(--bs-orange);
 }
 
 .navbar-light .navbar-brand h1 {
@@ -922,4 +918,26 @@ figure .img-fluid {
 
 .admin-card:hover {
     border-color: #fd7e14;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #222 !important;
+    border-color: #222 !important;
+    color: #fff !important;
+}
+
+.pagination .page-item .page-link {
+    color: #f48b65 !important;
+    border-color: #f48b65 !important;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #f48b65 !important;
+    color: #fff !important;
+    border-color: #f48b65 !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #999 !important;
+    border-color: #ccc !important;
 }

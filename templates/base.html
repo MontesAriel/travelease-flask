@@ -31,7 +31,10 @@
 
     <script src="{{ url_for('static', filename='js/ReservarPaquete.js') }}"></script>
     <script src="{{ url_for('static', filename='js/Login.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script>
+        const USER_LOGGED_IN = "{{ '1' if username else '0' }}";
+    </script>
 </head>
 <body>
   <!-- NAVBAR -->

@@ -7,6 +7,12 @@
     .carousel-header {
         display: none !important;
     }
+    .navbar-light .navbar-brand h1 {
+        color: #333;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        color: #333;
+    }
 </style>
 {% endblock %}
 
@@ -89,7 +95,7 @@
                                         </div>
                                         <div class="item-price">
                                             <strong class="fs-6 text-dark">
-                                               <sup>$</sup>{{ alojamiento.precio_base | default(0) | precio }}
+                                               <sup>$</sup>{{ alojamiento.precio_noche | default(0) | precio }} /noche
                                             </strong>
                                         </div>       
                                     </div>
@@ -174,7 +180,7 @@
                                     <p class="text-success p-pago"><i class="fas fa-lock me-1"></i>Paga Rápido y Seguro</p>         
                                 </div>
                                 <div class="mb-4">
-                                    <span class="text-secondary fw-bold-1">Payment amount:</span>
+                                    <span class="text-secondary fw-bold-1">Total a pagar:</span>
                                     <br>
                                     <strong class=" fw-bold-4 fs-2 text-dark"><sup>$</sup>{{ reserva.precio_total | precio }}</strong>
                                 </div>

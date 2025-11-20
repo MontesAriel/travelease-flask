@@ -32,21 +32,39 @@ def home():
     return render_template('index.html', destinos=destinos)
 
 
-@app.route('/destino/<int:destino_id>')
+@app.route("/destino/<int:destino_id>")
 def destino_detalle(destino_id):
     destino = Destino.query.get_or_404(destino_id)
-    alojamiento = Alojamiento.query.filter_by(destino_id=destino_id).first()
-    vuelos = [pv.vuelo for pv in destino.vuelos]
+
+    # Vuelos de ida
+    vuelos_ida = (
+        PaqueteVuelo.query
+        .filter_by(destino_id=destino_id, tipo="ida")
+        .join(Vuelo)
+        .order_by(Vuelo.fecha_salida)
+        .all()
+    )
+
+    # Vuelos de vuelta
+    vuelos_vuelta = (
+        PaqueteVuelo.query
+        .filter_by(destino_id=destino_id, tipo="vuelta")
+        .join(Vuelo)
+        .order_by(Vuelo.fecha_salida)
+        .all()
+    )
+
+    # Si hay ida y vuelta, hay vuelos
+    vuelos = len(vuelos_ida) > 0 and len(vuelos_vuelta) > 0
 
     return render_template(
         "destino/destino_id.html",
         destino=destino,
         imagenes=destino.imagenes,
-        destacados=destino.destacados,
-        incluye=destino.incluye,
-        itinerario=destino.itinerario,
-        alojamiento=alojamiento,
-        vuelos=vuelos
+        alojamientos=destino.alojamientos,
+        vuelos=vuelos,
+        vuelos_ida=vuelos_ida,
+        vuelos_vuelta=vuelos_vuelta
     )
 
 @app.route('/reserva/<int:destino_id>', methods=["POST"])
@@ -55,23 +73,23 @@ def crear_reserva(destino_id):
         flash("Debes iniciar sesión para realizar una reserva.")
         return redirect(url_for("login"))
 
-    destino = Destino.query.get_or_404(destino_id)
-    alojamiento = Alojamiento.query.filter_by(destino_id=destino_id).first()
-    vuelos = [pv.vuelo for pv in destino.vuelos]
-
     fecha_inicio = request.form.get("fecha_inicio")
     fecha_fin = request.form.get("fecha_fin")
     pasajeros = int(request.form.get("pasajeros", 1))
     precio_total = float(request.form.get("precio_total", 0))
+
+    alojamiento_id = request.form.get("alojamiento_id")
+    vuelo_ida_id = request.form.get("vuelo_ida_id")
+    vuelo_vuelta_id = request.form.get("vuelo_vuelta_id")
 
     if not fecha_inicio or not fecha_fin or precio_total <= 0:
         abort(400, "Datos de reserva inválidos")
 
     reserva = Reserva(
         usuario_id=session["usuario_id"],
-        alojamiento_id=alojamiento.alojamiento_id if alojamiento else None,
-        vuelo_ida_id=vuelos[0].vuelo_id if len(vuelos) > 0 else None,
-        vuelo_vuelta_id=vuelos[1].vuelo_id if len(vuelos) > 1 else None,
+        alojamiento_id=alojamiento_id,
+        vuelo_ida_id=vuelo_ida_id,
+        vuelo_vuelta_id=vuelo_vuelta_id,
         fecha_inicio=datetime.strptime(fecha_inicio, "%Y-%m-%d"),
         fecha_fin=datetime.strptime(fecha_fin, "%Y-%m-%d"),
         pasajeros=pasajeros,
@@ -81,10 +99,11 @@ def crear_reserva(destino_id):
 
     db.session.add(reserva)
     db.session.commit()
-    session["reserva_id"] = reserva.reserva_id
 
+    session["reserva_id"] = reserva.reserva_id
     flash("Reserva creada con éxito. Continuá con el pago.")
     return redirect(url_for("payment"))
+
 
 @app.route('/logout')
 def logout():
@@ -386,11 +405,13 @@ def admin_vuelos():
 def admin_vuelo_new():
     aerolineas = Aerolinea.query.all()
     aeropuertos = Aeropuerto.query.all()
-    return render_template('admin/vuelo_form.html', aerolineas=aerolineas, aeropuertos=aeropuertos)
+    destinos = Destino.query.all()
+    return render_template('admin/vuelo_form.html', aerolineas=aerolineas, aeropuertos=aeropuertos, destinos=destinos)
 
 
 @app.route('/admin/vuelos/create', methods=["POST"])
 def admin_vuelo_create():
+
     vuelo = Vuelo(
         aerolinea_id=request.form["aerolinea_id"],
         origen_id=request.form["origen_id"],
@@ -403,15 +424,20 @@ def admin_vuelo_create():
     db.session.add(vuelo)
     db.session.commit()
 
+    tipo_vuelo = request.form.get("tipo_vuelo")
+    destino_turistico_id = request.form.get("destino_turistico_id")
+
+    # SOLO si es vuelo de ida se crea PaqueteVuelo
+    if tipo_vuelo == "ida" and destino_turistico_id:
+        paquete = PaqueteVuelo(
+            destino_id=destino_turistico_id,
+            vuelo_id=vuelo.vuelo_id,
+            tipo="ida"
+        )
+        db.session.add(paquete)
+        db.session.commit()
+
     return redirect(url_for("admin_vuelos"))
-
-
-@app.route('/admin/vuelos/edit/<int:vuelo_id>')
-def admin_vuelo_edit(vuelo_id):
-    vuelo = Vuelo.query.get_or_404(vuelo_id)
-    aerolineas = Aerolinea.query.all()
-    aeropuertos = Aeropuerto.query.all()
-    return render_template('admin/vuelo_form.html', vuelo=vuelo, aerolineas=aerolineas, aeropuertos=aeropuertos)
 
 
 @app.route('/admin/vuelos/update/<int:vuelo_id>', methods=["POST"])
@@ -427,7 +453,48 @@ def admin_vuelos_update(vuelo_id):
 
     db.session.commit()
 
+    tipo_vuelo = request.form.get("tipo_vuelo")
+    destino_turistico_id = request.form.get("destino_turistico_id")
+
+    paquete = PaqueteVuelo.query.filter_by(vuelo_id=vuelo_id).first()
+
+    if tipo_vuelo == "ida":
+        if not paquete:
+            paquete = PaqueteVuelo(
+                destino_id=destino_turistico_id,
+                vuelo_id=vuelo_id,
+                tipo="ida"
+            )
+            db.session.add(paquete)
+        else:
+            paquete.destino_id = destino_turistico_id
+            paquete.tipo = "ida"
+
+    else:
+        if paquete:
+            db.session.delete(paquete)
+
+    db.session.commit()
+
     return redirect(url_for("admin_vuelos"))
+
+@app.route('/admin/vuelos/edit/<int:vuelo_id>')
+def admin_vuelo_edit(vuelo_id):
+    vuelo = Vuelo.query.get_or_404(vuelo_id)
+    aerolineas = Aerolinea.query.all()
+    aeropuertos = Aeropuerto.query.all()
+    destinos = Destino.query.all()
+
+    paquete = PaqueteVuelo.query.filter_by(vuelo_id=vuelo_id).first()
+
+    return render_template(
+        'admin/vuelo_form.html',
+        vuelo=vuelo,
+        aerolineas=aerolineas,
+        aeropuertos=aeropuertos,
+        destinos=destinos,
+        paquete=paquete
+    )
 
 
 @app.route('/admin/vuelos/delete/<int:vuelo_id>')
@@ -641,7 +708,12 @@ def admin_aerolinea_delete(aerolinea_id):
 
 @app.route('/admin/reservas')
 def admin_reservas():
-    reservas = Reserva.query.all()
+    page = request.args.get('page', 1, type=int)
+
+    reservas = Reserva.query \
+        .order_by(Reserva.reserva_id.asc()) \
+        .paginate(page=page, per_page=10)
+
     return render_template("admin/reservas_list.html", reservas=reservas)
 
 
