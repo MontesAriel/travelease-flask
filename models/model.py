@@ -1,5 +1,5 @@
 from config import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Usuario(db.Model):
     __tablename__ = "usuario"
@@ -7,7 +7,7 @@ class Usuario(db.Model):
     nombre = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     contrasena = db.Column(db.String(255), nullable=False)
-    creado = db.Column(db.DateTime, default=datetime.utcnow)
+    creado = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class Pais(db.Model):

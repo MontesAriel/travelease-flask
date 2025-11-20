@@ -16,6 +16,7 @@ El proyecto fue desarrollado como trabajo práctico integrador para la materia *
 | **Autenticación** | Flask-Bcrypt + Sesiones |
 | **Versionado** | Git + GitHub |
 | **Entorno virtual** | venv (.venv) |
+| **Testing** | Pytest |
 
 ---
 
@@ -88,6 +89,8 @@ Versión	Descripción
 v1.0.0	Creación del proyecto y estructura inicial
 v1.1.0	Flujo completo de reserva y pago
 v1.2.0	Estilo visual TravelEase + íconos Bootstrap + documentación actualizada
+v1.3.0  Agregados tests unitarios con Pytest (tests básicos de Aerolinea, Usuario y Reserva)
+
 ```
 
 #### ✅ Cumplido
@@ -104,10 +107,6 @@ v1.2.0	Estilo visual TravelEase + íconos Bootstrap + documentación actualizada
   - Pago
 - CRUD de destinos, vuelos, alojamientos, pagos, reservas, usuarios, aeropuertos, aerolineas (panel admin)
 - Documentación técnica y README actualizados
-```
-
-#### 🔧 En Progreso
-```bash
 - Testing
 ```
 
